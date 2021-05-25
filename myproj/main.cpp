@@ -14,11 +14,13 @@
 #include "helperFunctions.h"
 #include "myParticle.h"
 #include "mySpring.h"
+#include "Wind.h"
 #include "myMassSpring.h"
 #include "mySphere.h"
 #include <iostream>
 #include "myCamera.h"
 #include "default_constants.h"
+
 
 
 using namespace std;
@@ -35,8 +37,8 @@ mySphere *sphere;
 
 myMassSpring *my_mass_spring;
  
-
-
+Wind *wind;
+int ang;
 void mouse(int button, int state, int x, int y)
 {
   int b = (button == GLUT_LEFT_BUTTON) ? 0 : ((button == GLUT_MIDDLE_BUTTON) ? 1 : 2);
@@ -116,6 +118,12 @@ void keyboard2(int key, int x, int y)
 		case GLUT_KEY_RIGHT:
 			camera->turnRight(DEFAULT_LEFTRIGHTTURN_MOVEMENT_STEPSIZE);
 			break;
+		case GLUT_KEY_F1:
+			wind->amplitude += 1;
+			break;
+		case GLUT_KEY_F2:
+			wind->amplitude -= 1;
+			break;
 	}
 	glutPostRedisplay();
 }
@@ -132,10 +140,10 @@ void idle()
 		sphere->translate(glm::vec3(-sphere->velocity, 0.0f, 0.0f));
 
 
-	my_mass_spring->addForces();
+	my_mass_spring->addForces(*wind);
 	my_mass_spring->groundCollision(-CUBE_RADIUS);
 
-	my_mass_spring->calculateNextPosition(my_mass_spring->integrator);
+	my_mass_spring->calculateNextPosition();
 	my_mass_spring->clearForces();
 
 	if (sphere != nullptr) my_mass_spring->ballCollision(sphere);
@@ -155,6 +163,7 @@ void idle()
 
 		sphere = new mySphere(glm::vec3(CUBE_RADIUS, random_y, random_z), random_radius, glm::vec4((static_cast <float> (rand()) / static_cast <float> (RAND_MAX)), (static_cast <float> (rand()) / static_cast <float> (RAND_MAX)), (static_cast <float> (rand()) / static_cast <float> (RAND_MAX)), 0.0), random_speed);
 	}
+	wind->updateSpeed();
 }
 
 
@@ -173,6 +182,7 @@ void display()
 	glm::mat3 normal_matrix = glm::transpose(glm::inverse(glm::mat3(view_matrix)));
 	shader->setUniform("mynormal_matrix", normal_matrix);
 
+	
 	//drawing the sphere.
 	if (sphere != nullptr)
 	{
@@ -191,6 +201,12 @@ void display()
 
 	my_mass_spring->drawSpring();
 
+	glm::vec3 rotAxis(0.0f, -1.0f, 0.0f);
+	shader->setUniform("mymodel_matrix", glm::rotate(glm::mat4(1.0f), wind->angle-1.7f,rotAxis));
+	glutSolidCone(1, 4, 10, 10);
+	
+
+
 	glFlush();
 }
 
@@ -199,6 +215,8 @@ void init()
 	srand( (unsigned int)time(NULL));
 	sphere = nullptr;
 	my_mass_spring = new myMassSpring();
+	wind = new Wind();
+	ang = 0;
 }
 
 int main(int argc, char* argv[])

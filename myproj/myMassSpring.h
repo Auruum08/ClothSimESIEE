@@ -4,6 +4,7 @@
 #include "mySpring.h"
 #include "mySphere.h"
 #include "PerlinNoise.hpp"
+#include "Wind.h"
 #include <vector>
 
 using namespace std;
@@ -25,9 +26,9 @@ public:
 
 	void clearForces();
 
-	void addForces();
+	void addForces(Wind wind);
 
-	void calculateNextPosition(int p_integrator);
+	void calculateNextPosition();
 
 	void ballCollision(mySphere *s);
 
@@ -37,8 +38,19 @@ public:
 
 	void drawSpring();
 
-	void initSprings(unsigned int width, unsigned int height, int profondeurLiens);
-	void badcollisionNat(mySphere* s);
+
+	// fonctions nat:
+
+			/*initialise les ressorts. */
+			void initSprings(unsigned int width, unsigned int height, int profondeurLiens);
+
+			/* mauvaise implémentation des collisions, (avec des sphères)*/
+			void badcollisionNat(mySphere* s);
+
+			glm::vec3 DisneyWindForce(myParticle p, glm::vec3 winSpd);
+			glm::vec3 BasicFluidForce(myParticle p, glm::vec3 winSpd);
+			glm::vec3 getWindSpeed();
+
 	~myMassSpring();
 };
 

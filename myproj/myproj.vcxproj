@@ -160,8 +160,8 @@
   <ItemGroup>
     <ClInclude Include="configuration.h" />
     <ClInclude Include="default_constants.h" />
+    <ClInclude Include="Wind.h" />
     <ClInclude Include="helperFunctions.h" />
-    <ClInclude Include="include\SOIL\SOIL.h" />
     <ClInclude Include="myCamera.h" />
     <ClInclude Include="myMassSpring.h" />
     <ClInclude Include="myParticle.h" />
@@ -169,13 +169,8 @@
     <ClInclude Include="mySphere.h" />
     <ClInclude Include="mySpring.h" />
     <ClInclude Include="PerlinNoise.hpp" />
-    <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\soil-master (1)\soil-master\src\image_dxt.c" />
-    <ClCompile Include="..\..\..\soil-master (1)\soil-master\src\image_helper.c" />
-    <ClCompile Include="..\..\..\soil-master (1)\soil-master\src\soil.c" />
-    <ClCompile Include="..\..\..\soil-master (1)\soil-master\src\stb_image_aug.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="myCamera.cpp" />
     <ClCompile Include="myMassSpring.cpp" />
@@ -183,9 +178,7 @@
     <ClCompile Include="myShader.cpp" />
     <ClCompile Include="mySphere.cpp" />
     <ClCompile Include="mySpring.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="container.png" />
+    <ClCompile Include="Wind.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

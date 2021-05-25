@@ -60,10 +60,7 @@
     <ClInclude Include="PerlinNoise.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="stb_image.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\SOIL\SOIL.h">
+    <ClInclude Include="Wind.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -89,22 +86,8 @@
     <ClCompile Include="myCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\soil-master (1)\soil-master\src\soil.c">
+    <ClCompile Include="Wind.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\soil-master (1)\soil-master\src\image_dxt.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\soil-master (1)\soil-master\src\image_helper.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\soil-master (1)\soil-master\src\stb_image_aug.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="container.png">
-      <Filter>Header Files</Filter>
-    </Image>
   </ItemGroup>
 </Project>

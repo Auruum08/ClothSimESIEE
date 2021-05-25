@@ -6,7 +6,7 @@
 #include "mySphere.h"
 #include <iostream>
 #include <math.h>   
-#include "PerlinNoise.hpp"
+#include "Wind.h"
 
 myMassSpring::myMassSpring(unsigned int width, unsigned int height)
 {
@@ -55,33 +55,17 @@ void myMassSpring::clearForces()
 	}
 }
 
-void myMassSpring::addForces()
+void myMassSpring::addForces(Wind wind)
 {
-	siv::PerlinNoise noise;
-	wcount += 0.00001f;
-	double rho = 1.225;
-
-
-	double drag_coeff = 0.06;
-	double lift_coeff = 0.03;
 
 	glm::vec3 gravity(0.0f, -DEFAULT_MASS * GRAVITY, 0.0f);
-	
-
-	float windDir = 10*noise.noise1D(wcount);
-	float windAmpl = (float)(-20.0f * (1.0f - 0.2 * (0.5f + 0.5f*windDir)));
-	glm::vec3 windAmp = (float)(50.0f * noise.noise1D(wcount)) * glm::vec3(cos(windDir),0.0f,sin(windDir));
-	//glm::vec3 windSpd( windAmp.x,0.0f,windAmp.z);
-	glm::vec3 windSpd(10.0f,0.0f,0.0f);
 
 	for (auto& row : particles) {
 		for (auto& col : row) {
 			col.addForce(gravity);
-			float aera = (SPACE_P1_TO_P2 * SPACE_P1_TO_P2) / 2;
-		
-			//col.addForce(0.09f*(glm::dot(col.normal,(windSpd-col.velocity)))*col.normal);
-			glm::vec3 winforce = (float)(0.5f * rho * aera * (drag_coeff - lift_coeff) * (glm::dot(windSpd, col.normal) + lift_coeff * glm::length(windSpd) * glm::length(windSpd))) * col.normal;
-			col.addForce(winforce);
+
+			//col.addForce(wind.disneyForce(col));
+			col.addForce(wind.basicForce(col));
 		}
 	}
 
@@ -94,7 +78,7 @@ void myMassSpring::addForces()
    /*TODO: add gravity/spring forces*/
 }
 
-void myMassSpring::calculateNextPosition(int p_integrator)
+void myMassSpring::calculateNextPosition()
 {
 	for (auto& row : this->particles) {
 		for (auto& col : row) {
@@ -184,6 +168,8 @@ void myMassSpring::drawSpring()
 	glEnd();
 }
 
+
+/* nat functions */
 void myMassSpring::initSprings(unsigned int width, unsigned int height, int profondeurLiens)
 {
 	int taille=0;
@@ -251,6 +237,8 @@ void myMassSpring::badcollisionNat(mySphere* s) {
 		}
 	}
 }
+
+
 
 myMassSpring::~myMassSpring()
 {
