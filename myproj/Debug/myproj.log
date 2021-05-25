@@ -1,9 +1,1 @@
-﻿  main.cpp
-  myCamera.cpp
-  myMassSpring.cpp
-  myParticle.cpp
-  myShader.cpp
-  mySphere.cpp
-  mySpring.cpp
-  Génération de code en cours...
-LINK : fatal error LNK1104: impossible d'ouvrir le fichier 'freeglutd.lib'
+﻿  myproj.vcxproj -> C:\Users\nathan\Documents\GitHub\ClothSimESIEE\Debug\myproj.exe

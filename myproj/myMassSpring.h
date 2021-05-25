@@ -47,10 +47,6 @@ public:
 			/* mauvaise implémentation des collisions, (avec des sphères)*/
 			void badcollisionNat(mySphere* s);
 
-			glm::vec3 DisneyWindForce(myParticle p, glm::vec3 winSpd);
-			glm::vec3 BasicFluidForce(myParticle p, glm::vec3 winSpd);
-			glm::vec3 getWindSpeed();
-
 	~myMassSpring();
 };
 
