@@ -1,6 +1,6 @@
 #pragma once
 #include <glm/glm.hpp>
-
+#include "bvh.h"
 class mySphere
 {
 public:
@@ -8,6 +8,10 @@ public:
 	float radius;
 	glm::vec4 kd;
 	float velocity;
+
+	// nat
+	Aabb box;
+
 
 	void translate(glm::vec3);
 

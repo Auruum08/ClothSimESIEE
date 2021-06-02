@@ -63,6 +63,9 @@
     <ClInclude Include="Wind.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="bvh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -87,6 +90,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Wind.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bvh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

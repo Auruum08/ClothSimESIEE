@@ -1,27 +1,8 @@
 ﻿  main.cpp
 C:\Users\nathan\Documents\GitHub\ClothSimESIEE\myproj\configuration.h(14,26): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-  myCamera.cpp
-  myMassSpring.cpp
-C:\Users\nathan\Documents\GitHub\ClothSimESIEE\myproj\configuration.h(14,26): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-C:\Users\nathan\Documents\GitHub\ClothSimESIEE\myproj\myMassSpring.cpp(194,21): warning C4018: '<' : incompatibilité signed/unsigned
-C:\Users\nathan\Documents\GitHub\ClothSimESIEE\myproj\myMassSpring.cpp(196,22): warning C4018: '<' : incompatibilité signed/unsigned
-C:\Users\nathan\Documents\GitHub\ClothSimESIEE\myproj\myMassSpring.cpp(203,21): warning C4018: '<' : incompatibilité signed/unsigned
-C:\Users\nathan\Documents\GitHub\ClothSimESIEE\myproj\myMassSpring.cpp(205,22): warning C4018: '<' : incompatibilité signed/unsigned
-C:\Users\nathan\Documents\GitHub\ClothSimESIEE\myproj\myMassSpring.cpp(215,21): warning C4018: '<' : incompatibilité signed/unsigned
-C:\Users\nathan\Documents\GitHub\ClothSimESIEE\myproj\myMassSpring.cpp(217,22): warning C4018: '<' : incompatibilité signed/unsigned
-C:\Users\nathan\Documents\GitHub\ClothSimESIEE\myproj\myMassSpring.cpp(219,90): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
-C:\Users\nathan\Documents\GitHub\ClothSimESIEE\myproj\myMassSpring.cpp(220,94): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
-  myParticle.cpp
-C:\Users\nathan\Documents\GitHub\ClothSimESIEE\myproj\configuration.h(14,26): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-  myShader.cpp
-  mySphere.cpp
-  mySpring.cpp
-C:\Users\nathan\Documents\GitHub\ClothSimESIEE\myproj\configuration.h(14,26): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-  Wind.cpp
-C:\Users\nathan\Documents\GitHub\ClothSimESIEE\myproj\configuration.h(14,26): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-C:\Users\nathan\Documents\GitHub\ClothSimESIEE\myproj\Wind.cpp(25,15): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
   Génération de code en cours
-  Previous IPDB not found, fall back to full compilation.
-  All 568 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  2 of 717 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Fin de la génération du code
   myproj.vcxproj -> C:\Users\nathan\Documents\GitHub\ClothSimESIEE\Release\myproj.exe

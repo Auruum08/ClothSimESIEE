@@ -1,6 +1,7 @@
 #include "mySpring.h"
 #include <glm/glm.hpp>
 #include <iostream>
+#include <glm/glm.hpp>
 
 mySpring::mySpring()
 { 
@@ -18,9 +19,9 @@ mySpring::mySpring(myParticle *x1, myParticle *x2, float spring, float springl)
 
 void mySpring::addForce()
 {
-	glm::vec3 dist = p1->position - p2->position;
+	dist = p1->position - p2->position;
 	glm::vec3 delta_v = p1->velocity - p2->velocity;
-	glm::vec3 dir = glm::normalize(dist);
+	dir = glm::normalize(dist);
 
 	
 	glm::vec3 springforce = springConstant * (glm::length(dist) - restLength) * dir;
@@ -33,6 +34,30 @@ void mySpring::addForce()
 	
 
 	/*ajustement de la longueur des ressorts*/
+
+	
+	p2->addForce(springforce);
+	p2->addForce(-damping);
+	p1->addForce(-springforce);
+	p1->addForce(damping);
+	
+}
+
+float mySpring::getConstraint() {
+
+	float l = glm::length(p2->getNextPosition()-p1->getNextPosition()) - restLength;
+	return l;
+}
+
+mySpring::~mySpring()
+{
+
+}
+
+void mySpring::corrigepos() {
+	dist = p1->position - p2->position;
+	glm::vec3 delta_v = p1->velocity - p2->velocity;
+	dir = glm::normalize(dist);
 	glm::vec3 erreur = dir * (float)(glm::length(dist) - restLength);
 
 	/*
@@ -55,20 +80,4 @@ void mySpring::addForce()
 			}
 		}
 	}
-	
-	
-	p2->addForce(springforce);
-	p2->addForce(-damping);
-	p1->addForce(-springforce);
-	p1->addForce(damping);
-		
-	
-
-
-		
-	
-}
-
-mySpring::~mySpring()
-{
 }

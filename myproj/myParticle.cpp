@@ -49,10 +49,17 @@ void myParticle::calculateNextPosition()
 
 			old_position = position;
 			old_velocity = velocity;
-			old_acceleration = acceleration;
-			
+			old_acceleration = acceleration;		
 			return;	
 	}	
+}
+glm::vec3 myParticle::getNextPosition() {
+	glm::vec3 nextpos = position + velocity * (float)DT;
+	return nextpos;
+}
+void myParticle::computeNewVelocity() {
+	acceleration = force / mass;
+	//velocity = velocity + (old_acceleration + acceleration) * (float)(DT * 0.5);
 }
 
 myParticle::~myParticle()

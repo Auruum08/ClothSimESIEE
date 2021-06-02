@@ -158,6 +158,7 @@
     <None Include="shaders\phong-vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bvh.h" />
     <ClInclude Include="configuration.h" />
     <ClInclude Include="default_constants.h" />
     <ClInclude Include="Wind.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="PerlinNoise.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bvh.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="myCamera.cpp" />
     <ClCompile Include="myMassSpring.cpp" />

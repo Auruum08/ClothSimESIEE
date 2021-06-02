@@ -8,11 +8,11 @@
 
 Wind::Wind(){
 	speed = glm::vec3(5.0f,0.0f,0.0f);
-	amplitude = 10.0f;
+	amplitude = 3.0f;
 
 	rho = 1.225;
-	drag_coeff = 0.1; //0.06;
-	lift_coeff = 0;	  //0.01;
+	drag_coeff = 0.06; //0.06;//0.1
+	lift_coeff = 0.01;	  //0.01;//0
 }
 void Wind::updateSpeed() {
 	move();

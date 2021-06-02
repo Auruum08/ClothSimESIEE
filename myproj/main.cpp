@@ -1,6 +1,7 @@
 #include <fstream>
 #include <GL/glew.h>
 #include <GL/freeglut.h>
+
 #include <time.h> 
 #include <vector>
 #include <stdlib.h>      
@@ -15,11 +16,13 @@
 #include "myParticle.h"
 #include "mySpring.h"
 #include "Wind.h"
+#include "bvh.h"
 #include "myMassSpring.h"
 #include "mySphere.h"
 #include <iostream>
 #include "myCamera.h"
 #include "default_constants.h"
+
 
 
 
@@ -39,6 +42,7 @@ myMassSpring *my_mass_spring;
  
 Wind *wind;
 int ang;
+bool smove;
 void mouse(int button, int state, int x, int y)
 {
   int b = (button == GLUT_LEFT_BUTTON) ? 0 : ((button == GLUT_MIDDLE_BUTTON) ? 1 : 2);
@@ -102,6 +106,7 @@ void keyboard(unsigned char key, int x, int y)
 
 void keyboard2(int key, int x, int y) 
 {
+	smove = false;
  	int mode = glutGetModifiers();
 
 	switch(key) 
@@ -120,9 +125,11 @@ void keyboard2(int key, int x, int y)
 			break;
 		case GLUT_KEY_F1:
 			wind->amplitude += 1;
+			my_mass_spring->depth += 1;
 			break;
 		case GLUT_KEY_F2:
 			wind->amplitude -= 1;
+			my_mass_spring->depth -= 1;
 			break;
 	}
 	glutPostRedisplay();
@@ -136,7 +143,8 @@ void reshape(int width, int height)
  
 void idle()
 {
-	if (sphere != nullptr)
+	
+	if (sphere != nullptr )
 		sphere->translate(glm::vec3(-sphere->velocity, 0.0f, 0.0f));
 
 
@@ -156,10 +164,10 @@ void idle()
 	{
 		if (sphere != nullptr) delete sphere;
 		//sphere = new mySphere(glm::vec3(CUBE_RADIUS, 2, 0), 6, glm::vec4(0.4, 0.0, 0.4, 0.0), 0.01f);
-		float random_y = 4 * (static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) - 0.0f;
-		float random_z = 4 * (static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) - 2.0f;
-		float random_radius = 6 * (static_cast <float> (rand()) / static_cast <float> (RAND_MAX) + 0.15f);
-		float random_speed = 0.01f * (static_cast <float> (rand()) / static_cast <float> (RAND_MAX)+0.1f);
+		float random_y = 2 * (static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) + 4.0f;
+		float random_z = 2 * (static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) - 0.0f;
+		float random_radius = 1 * (static_cast <float> (rand()) / static_cast <float> (RAND_MAX) + 0.15f);
+		float random_speed = 0.002f;//* (static_cast <float> (rand()) / static_cast <float> (RAND_MAX)+0.1f);
 
 		sphere = new mySphere(glm::vec3(CUBE_RADIUS, random_y, random_z), random_radius, glm::vec4((static_cast <float> (rand()) / static_cast <float> (RAND_MAX)), (static_cast <float> (rand()) / static_cast <float> (RAND_MAX)), (static_cast <float> (rand()) / static_cast <float> (RAND_MAX)), 0.0), random_speed);
 	}
@@ -186,9 +194,16 @@ void display()
 	//drawing the sphere.
 	if (sphere != nullptr)
 	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glBegin(GL_QUADS);
+		sphere->box.draw();
+		glEnd();
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
 		shader->setUniform("kd", sphere->kd);
 		shader->setUniform("mymodel_matrix", glm::translate(glm::mat4(1.0f), sphere->center));
 		glutSolidSphere(sphere->radius - 0.2, 50, 50);
+	
 	}
 
 	shader->setUniform("mymodel_matrix", glm::mat4(1.0f));
@@ -200,12 +215,17 @@ void display()
 	shader->setUniform("kd", my_mass_spring->kd);
 
 	my_mass_spring->drawSpring();
+	//my_mass_spring->drawBVH();
 
 	glm::vec3 rotAxis(0.0f, -1.0f, 0.0f);
 	shader->setUniform("mymodel_matrix", glm::rotate(glm::mat4(1.0f), wind->angle-1.7f,rotAxis));
 	glutSolidCone(1, 4, 10, 10);
 	
+	
+	//nat : draw all the bounding cubes
 
+	shader->setUniform("mymodel_matrix", glm::mat4(1.0f));
+	if (sphere != nullptr) my_mass_spring->drawBVH2(my_mass_spring->nodes[my_mass_spring->nodes.size() - 1], 0, sphere);
 
 	glFlush();
 }

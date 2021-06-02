@@ -28,5 +28,9 @@ public:
 
 	void addForce(glm::vec3 f);
 	void calculateNextPosition(); 
+
+	// fonctions nat
+	glm::vec3 getNextPosition();
+	void computeNewVelocity();
 };
 

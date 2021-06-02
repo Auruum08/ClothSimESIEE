@@ -7,6 +7,10 @@ class mySpring
 public:
 	float restLength;
 	float springConstant;
+	
+	glm::vec3 dist;
+	glm::vec3 dir;
+
 	myParticle *p1;
 	myParticle *p2;
 
@@ -15,5 +19,7 @@ public:
 	~mySpring();
 
 	void mySpring::addForce();
+	float mySpring::getConstraint();
+	void mySpring::corrigepos();
 };
 
